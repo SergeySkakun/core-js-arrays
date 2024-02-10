@@ -593,9 +593,9 @@ function findCommonElements(arr1, arr2) {
  */
 function findLongestIncreasingSubsequence(nums) {
   let sequence = nums.slice(0, 1);
+  const dividedArr = nums.slice(1);
   let longestSequence = 1;
   let currentSequence = 1;
-  const dividedArr = nums.slice(1);
 
   dividedArr.map((el) => {
     const isSequence = sequence.every((elSeq) => {
@@ -632,8 +632,20 @@ function findLongestIncreasingSubsequence(nums) {
  *  propagateItemsByPositionIndex([ 'a', 'b', 'c', null ]) => [ 'a', 'b', 'b', 'c', 'c', 'c',  null, null, null, null ]
  *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  if (arr.length === 0) {
+    return [];
+  }
+
+  const result = arr.reduce((acc, el, ind) => {
+    let tempArr = acc;
+    const innerArr = new Array(ind + 1);
+    innerArr.fill(el);
+    tempArr = [...acc, ...innerArr];
+    return tempArr;
+  }, []);
+
+  return result;
 }
 
 /**
